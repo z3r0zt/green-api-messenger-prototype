@@ -1,0 +1,42 @@
+.mainPage {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+
+	.cardRoot {
+		border: 1px solid var(--border-color);
+	}
+
+	.card {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		width: 400px;
+		height: auto;
+	}
+
+	.title {
+		font-size: 24px;
+		color: var(--text-h);
+	}
+
+	.error {
+		font-size: 14px;
+		color: var(--error);
+	}
+
+	.form {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.input, .button {
+		border: none;
+		height: 52px;
+		border-radius: 20px;
+		font-size: 17px;
+	}
+}
