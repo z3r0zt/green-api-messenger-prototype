@@ -1,2 +1,2 @@
 export * from "./mainPage";
-export * from "./messangerPage";
+export * from "./messengerPage";

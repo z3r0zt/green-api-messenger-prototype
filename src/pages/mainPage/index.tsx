@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Card, Input, Form, Button } from 'antd';
 import AccountService from '../../services/account';
+import { useMainContext } from '../../context/mainContext';
+import { cookies } from '../../helpers';
 
 import styles from './style.module.scss';
 
@@ -10,19 +12,24 @@ export const MainPage = () => {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  const { setCookie } = cookies;
+  const { setIsAuthorized } = useMainContext();
 
   const idInstance = import.meta.env.VITE_ID_INSTANCE;
   const apiTokenInstance = import.meta.env.VITE_API_TOKEN_INSTANCE;
 
   const login = async () => {
-    const formData = form.getFieldsValue();
+    const { idInstance, apiTokenInstance } = form.getFieldsValue();
     setIsLoading(true);
     try {
-      const response = await AccountService.getAccountInfo(formData.idInstance, formData.apiTokenInstance);
-      if (response.data?.stateInstance === "authorized" || response.status !== 200) {
-        navigate('/messanger');
+      const { data } = await AccountService.getAccountInfo(idInstance, apiTokenInstance);
+      if (data.stateInstance === "authorized") {
+        setCookie('idInstance', idInstance);
+        setCookie('apiTokenInstance', apiTokenInstance);
+        setIsAuthorized(true);
+        navigate('/messenger');
       } else {
-        setError("Неверный ID Instance или API Token Instance");
+        setError("Инстанс не авторизован");
       }
     } catch (error) {
       setError("Неверный ID Instance или API Token Instance");
@@ -44,7 +51,7 @@ export const MainPage = () => {
         </p>
       }
       <Card classNames={{ body: styles.card }} rootClassName={styles.cardRoot}>
-        <p className={styles.title}>Аторизуйстесь</p>
+        <p className={styles.title}>Авторизуйтесь</p>
         {error &&
           <p className={styles.error}>
             {error}
