@@ -1,5 +1,5 @@
 import { Layout } from 'antd';
-import { MessengerSider, MessengerContent, MessengerHeader } from '@blocks';
+import { MessengerSider, MessengerContent, MessengerHeader, MessengerFooter } from '@blocks';
 import { MessengerContextProvider } from '@context';
 
 import styles from './styles.module.scss';
@@ -21,7 +21,9 @@ export const MessengerPage = () => {
             <Content>
               <MessengerContent />
             </Content>
-            <Footer>Footer</Footer>
+            <Footer>
+              <MessengerFooter />
+            </Footer>
           </Layout>
         </Layout>
       </MessengerContextProvider>

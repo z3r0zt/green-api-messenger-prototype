@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from 'antd';
 import { useMessengerContext } from '@context';
-import { FindContactModal } from '@components';
+import { FindContactModal, ChatItem } from '@components';
 import { PlusOutlined } from '@ant-design/icons';
 
 import styles from './styles.module.scss';
@@ -22,11 +22,9 @@ export const MessengerSider = () => {
           <PlusOutlined />
         </Button>
       </div>
-      <div>
+      <div className={styles.chats}>
         {chats.map(chat =>
-          <div key={chat.chatId}>
-            {chat.contactName}
-          </div>
+          <ChatItem key={chat.chatId} chat={chat} />
         )}
       </div>
     </div>

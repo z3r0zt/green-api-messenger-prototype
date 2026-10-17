@@ -1,0 +1,14 @@
+.chatItem {
+  padding: 16px;
+  display: flex;
+  background-color: var(--background-secondary);
+  cursor: pointer;
+  
+  &:hover {
+    filter: brightness(1.2)
+  }
+
+  .name {
+    margin: auto;
+  }
+}
