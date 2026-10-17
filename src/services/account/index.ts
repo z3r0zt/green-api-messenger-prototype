@@ -1,9 +1,9 @@
-import type { AxiosResponse } from "axios";
-import { $api } from "../../helpers/http";
+import type { AxiosResponse } from 'axios';
+import { $api } from '@helpers';
 
-type StateInstance = "notAuthorized" | "authorized" | "blocked" | "starting " | "suspended";
+type StateInstance = 'notAuthorized' | 'authorized' | 'blocked' | 'starting ' | 'suspended';
 
-interface AccountInfoResponse {
+export interface AccountInfoResponse {
   avatar: string;
   chatId: string;
   phone: string;
@@ -13,7 +13,7 @@ interface AccountInfoResponse {
   logoutProcess: boolean;
 };
 
-export default class AccountService {
+export class AccountService {
   static async getAccountInfo(idInstance: string, apiTokenInstance: string): Promise<AxiosResponse<AccountInfoResponse>> {
     return $api.get<AccountInfoResponse>(`/waInstance${idInstance}/getWaSettings/${apiTokenInstance}`);
   };

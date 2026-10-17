@@ -1,9 +1,8 @@
-import { MainLayout } from './layouts';
-import { MainPage, MessengerPage } from './pages';
+import { MainPage, MessengerPage } from '@pages';
 import { Route, Routes, BrowserRouter, Navigate } from 'react-router';
-import { ConfigProvider } from './providers/ConfigProvider';
-import { MainContextProvider } from './context/mainContext';
-import { ProtectedRoute } from './routes/protectedRoute';
+import { ConfigProvider } from '@providers';
+import { MainContextProvider } from '@context';
+import { ProtectedRoute } from '@routes';
 
 import styles from './styles.module.scss';
 
@@ -14,13 +13,11 @@ function App() {
         <MainContextProvider>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<MainLayout />}>
-                <Route index element={<MainPage />} />
-                <Route element={<ProtectedRoute />}>
-                  <Route path="/messenger" element={<MessengerPage />} />
-                </Route>
+              <Route path='/' element={<MainPage />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path='/messenger' element={<MessengerPage />} />
               </Route>
-              <Route path='*' element={<Navigate to="/" />} />
+              <Route path='*' element={<Navigate to='/' />} />
             </Routes>
           </BrowserRouter>
         </MainContextProvider>

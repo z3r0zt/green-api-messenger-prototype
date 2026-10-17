@@ -1,11 +1,12 @@
-import { createContext, useContext, useState } from "react";
-import AccountService from "../services/account";
-import { cookies } from "../helpers/cookies";
+import { createContext, useContext, useState } from 'react';
+import { AccountService } from '@services';
+import { cookies } from '@helpers';
 
 type MainContextValues = {
   isAuthorized: boolean;
   setIsAuthorized: (value: boolean) => void;
   isLoading: boolean;
+  setIsLoading: (value: boolean) => void;
   checkAccount: () => Promise<boolean>
   clearCookie: () => void;
 };
@@ -18,16 +19,16 @@ export const MainContextProvider = ({ children }: { children: React.ReactNode })
   const { getCookie, deleteCookie } = cookies;
 
   const clearCookie = () => {
-    deleteCookie("idInstance");
-    deleteCookie("apiTokenInstance");
+    deleteCookie('idInstance');
+    deleteCookie('apiTokenInstance');
     setIsAuthorized(false);
   }
 
   const checkAccount = async (): Promise<boolean> => {
     setIsLoading(true);
 
-    const idInstance = getCookie("idInstance");
-    const apiTokenInstance = getCookie("apiTokenInstance");
+    const idInstance = getCookie('idInstance');
+    const apiTokenInstance = getCookie('apiTokenInstance');
 
     if (!idInstance || !apiTokenInstance) {
       clearCookie();
@@ -37,7 +38,7 @@ export const MainContextProvider = ({ children }: { children: React.ReactNode })
 
     try {
       const { data } = await AccountService.getAccountInfo(idInstance, apiTokenInstance);
-      const ok = data.stateInstance === "authorized";
+      const ok = data.stateInstance === 'authorized';
       setIsAuthorized(ok);
       if (!ok) clearCookie();
       return ok;
@@ -50,7 +51,7 @@ export const MainContextProvider = ({ children }: { children: React.ReactNode })
     }
   };
 
-  return <MainContext.Provider value={{ isAuthorized, setIsAuthorized, isLoading, checkAccount, clearCookie }}>
+  return <MainContext.Provider value={{ isAuthorized, setIsAuthorized, isLoading, setIsLoading, checkAccount, clearCookie }}>
     {children}
   </MainContext.Provider>
 }
@@ -59,7 +60,7 @@ export const useMainContext = () => {
   const context = useContext(MainContext);
 
   if (!context) {
-    throw new Error("useMainContext must be used inside MainContextProvider");
+    throw new Error('useMainContext must be used inside MainContextProvider');
   }
 
   return context;

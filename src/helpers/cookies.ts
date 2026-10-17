@@ -4,7 +4,7 @@ export const cookies = {
   },
   getCookie: (name: string) => {
     const cookie = document.cookie
-      .split("; ")
+      .split('; ')
       .find(item => item.startsWith(`${name}=`));
   
     return cookie ? decodeURIComponent(cookie.slice(name.length + 1)) : null;

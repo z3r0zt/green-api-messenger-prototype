@@ -1,4 +1,5 @@
 :root {
+  --text-white: #fff;
   --text: #ffffffa3;
   --text-muted: rgba(255, 255, 255, 0.5);
   --text-h: #f3f4f6;
@@ -6,6 +7,7 @@
   --border-color: #ffffff1a;
   --background-primary: #17181c;
   --background-secondary: #333438;
+  --button-color: #007aff;
   --button-disabled-bg: #ffffff1f;
   --button-disabled-text-color: #ffffff47;
   --shadow:

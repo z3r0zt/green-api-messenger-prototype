@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Navigate, Outlet } from "react-router";
-import { Spin } from 'antd';
-import { useMainContext } from "../context/mainContext";
+import { useEffect, useState } from 'react';
+import { Navigate, Outlet } from 'react-router';
+import { useMainContext } from '@context';
+import { Spinner } from '@components';
 
 export const ProtectedRoute = () => {
   const { checkAccount, isAuthorized } = useMainContext();
@@ -15,7 +15,7 @@ export const ProtectedRoute = () => {
     checkAccount().finally(() => setChecked(true));
   }, []);
 
-  if (!checked) return <Spin size="large" />
+  if (!checked) return <Spinner fontSize={75} />
 
-  return isAuthorized ? <Outlet /> : <Navigate to="/" replace />;
+  return isAuthorized ? <Outlet /> : <Navigate to='/' replace />;
 }

@@ -1,11 +1,30 @@
-import { useNavigate } from 'react-router';
+import { Layout } from 'antd';
+import { MessengerSider, MessengerContent, MessengerHeader } from '@blocks';
+import { MessengerContextProvider } from '@context';
+
+import styles from './styles.module.scss';
+
+const { Sider, Header, Content, Footer } = Layout;
 
 export const MessengerPage = () => {
-  const navigate = useNavigate();
-
   return (
-    <section>
-      <button onClick={() => navigate('/')}>Go to Main</button>
+    <section className={styles.messengerPage}>
+      <MessengerContextProvider>
+        <Layout className={styles.layout}>
+          <Sider className={styles.sider}>
+            <MessengerSider />
+          </Sider>
+          <Layout>
+            <Header className={styles.header}>
+              <MessengerHeader />
+            </Header>
+            <Content>
+              <MessengerContent />
+            </Content>
+            <Footer>Footer</Footer>
+          </Layout>
+        </Layout>
+      </MessengerContextProvider>
     </section>
   );
 };

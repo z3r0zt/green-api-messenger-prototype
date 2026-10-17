@@ -7,6 +7,16 @@
     "types": ["vite/client"],
     "allowArbitraryExtensions": true,
     "skipLibCheck": true,
+    "paths": {
+      "@blocks": ["./src/blocks"],
+      "@components": ["./src/components"],
+      "@context": ["./src/context"],
+      "@helpers": ["./src/helpers"],
+      "@pages": ["./src/pages"],
+      "@providers": ["./src/providers"],
+      "@routes": ["./src/routes"],
+      "@services": ["./src/services"],
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

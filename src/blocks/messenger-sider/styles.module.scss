@@ -1,0 +1,29 @@
+.messengerSider {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-white);
+  
+  .siderTop {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 500;
+  }
+  
+  .findButton {
+    color: var(--text-white);
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+
+    &:hover {
+      filter: brightness(1.2);
+    }
+    
+    &:active {
+      filter: brightness(1);
+    }
+  }
+}
