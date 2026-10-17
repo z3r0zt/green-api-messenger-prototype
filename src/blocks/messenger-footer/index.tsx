@@ -1,6 +1,8 @@
 import { Button, Form, Input } from 'antd';
 import { useMessengerContext } from '@context';
 import { ArrowUpOutlined } from '@ant-design/icons';
+import { MessagesService } from '@services';
+import { getErrorMessage } from '@helpers';
 
 import styles from './styles.module.scss';
 
@@ -11,11 +13,20 @@ export const MessengerFooter = () => {
 
   if (!selectedChat.chatId) return null;
 
-  const handleSendMessege = ({ message }: { message: string }) => {
+  const handleSendMessege = async ({ message }: { message: string }) => {
     if (!message.trim()) return;
 
-    setMessages(prev => [...prev, { id: '1', text: message, type: 'outcoming' }]);
-    console.log(message)
+    try {
+      const { data } = await MessagesService.sendMessage(message, selectedChat.chatId);
+      if (data) {
+        setMessages(prev => [...prev, { id: data.idMessage, text: message, type: 'outcoming' }]);
+      } else {
+        form.setFields([{ name: 'message', errors: ['Не удалось отправить сообщение'] }])
+      }
+    } catch (e) {
+      form.setFields([{ name: 'message', errors: [getErrorMessage(e)] }])
+    }
+    
     form.setFieldValue('message', '');
   }
 

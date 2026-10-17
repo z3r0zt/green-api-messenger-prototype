@@ -8,11 +8,12 @@ interface SendMessageResponse {
 }
 
 export class MessagesService {
-  static async sendMessage(message: string): Promise<AxiosResponse<SendMessageResponse>> {
-    return $api.post<SendMessageResponse>(`/waInstance/${getCookie('idInstance')}/sendMessage/${getCookie('apiTokenInstance')}`,
+  static async sendMessage(message: string, chatId: string): Promise<AxiosResponse<SendMessageResponse>> {
+    return $api.post<SendMessageResponse>(`/waInstance${getCookie('idInstance')}/sendMessage/${getCookie('apiTokenInstance')}`,
       {
         message,
-        typingTime: '1000'
+        typingTime: '1000',
+        chatId
       }
     );
   };
