@@ -1,0 +1,23 @@
+.messengerContent {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+  height: 100%;
+
+  .messages {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 5px;
+    height: 100%;
+    width: 100%;
+    max-width: 720px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

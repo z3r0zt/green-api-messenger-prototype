@@ -1,0 +1,21 @@
+.messageItem {
+  width: 100%;
+  color: var(--text-white);
+
+  &:first-child {
+    margin-block-start: auto;
+  }
+  
+  .messageContainer {
+    display: flex;
+    width: fit-content;
+    max-width: 80%;
+    padding: 10px;
+    background-color: var(--background-secondary);
+    border-radius: 15px;
+  }
+
+  .messageContainerOutcoming {
+    justify-self: flex-end;
+  }
+}

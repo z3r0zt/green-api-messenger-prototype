@@ -1,6 +1,12 @@
 import { createContext, useContext, useState, type Dispatch, type SetStateAction } from 'react';
 import type { ChatInfoResponse, IChatInfo } from '../services/chats';
 
+export type Message = {
+  id: string;
+  text: string;
+  type: 'incoming' | 'outcoming';
+}
+
 type MessengerContextValues = {
   chats: ChatInfoResponse;
   setChats: Dispatch<SetStateAction<ChatInfoResponse>>
@@ -8,6 +14,8 @@ type MessengerContextValues = {
   setIsLoading: (value: boolean) => void;
   selectedChat: IChatInfo;
   setSelectedChat: Dispatch<SetStateAction<IChatInfo>>;
+  messages: Message[];
+  setMessages: Dispatch<SetStateAction<Message[]>>;
 };
 
 const MessengerContext = createContext<MessengerContextValues | null>(null);
@@ -16,6 +24,7 @@ export const MessengerContextProvider = ({ children }: { children: React.ReactNo
   const [chats, setChats] = useState<ChatInfoResponse>([]);
   const [selectedChat, setSelectedChat] = useState<IChatInfo>({} as IChatInfo);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   return <MessengerContext.Provider
     value={{
@@ -24,7 +33,9 @@ export const MessengerContextProvider = ({ children }: { children: React.ReactNo
       isLoading,
       setIsLoading,
       selectedChat,
-      setSelectedChat
+      setSelectedChat,
+      messages,
+      setMessages
     }}>
     {children}
   </MessengerContext.Provider>
